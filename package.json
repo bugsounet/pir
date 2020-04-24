@@ -1,0 +1,27 @@
+{
+  "name": "@bugsounet/pir",
+  "version": "1.0.0",
+  "description": "node pir library",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm rebuild && electron-rebuild"
+  },
+  "keywords": [
+    "pir",
+    "sensor"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bugsounet/pir"
+  },
+  "author": "bugsounet",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bugsounet/pir/issues"
+  },
+  "homepage": "https://github.com/bugsounet/pir",
+  "dependencies": {
+    "electron-rebuild": "^1.10.1",
+    "onoff": "^6.0.0"
+  }
+}
