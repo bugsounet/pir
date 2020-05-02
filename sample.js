@@ -1,12 +1,13 @@
 const Pir = require("./index.js")
 
 this.config = {
-  debug: false,
   gpio: 17,
-  reverseValue: true
+  reverseValue: false
 }
 
-this.pir = new Pir(this.config, callback)
+var debug= false
+
+this.pir = new Pir(this.config, callback, debug)
 
 this.pir.start()
 setTimeout(() => { this.pir.stop() } , 5000)

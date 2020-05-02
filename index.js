@@ -13,30 +13,26 @@ var log = function() {
 }
 
 class PIR {
-  constructor(config, callback) {
+  constructor(config, callback, debug) {
     this.config = config
     this.callback = callback
     this.version = require('./package.json').version
     this.default = {
-      debug: false,
       gpio: 21,
       reverseValue: false,
     }
-    this.config = Object.assign(this.default, this.config)
-    var debug = (this.config.debug) ? this.config.debug : false
     if (debug == true) log = _log
-    this.debug = debug
     this.pir = null
     this.running = false
-    log("Initialized")
+    console.log("[PIR] PIR v" + this.version + " Initialized...")
     this.callback("PIR_INITIALIZED")
   }
   start () {
     if (this.running) return
-    log("Starts v" + this.version)
-    this.callback("PIR_STARTED")
+    log("Start")
     try {
       this.pir = new Gpio(this.config.gpio, 'in', 'both')
+      this.callback("PIR_STARTED")
     } catch (err) {
       console.log("[PIR:ERROR] " + err)
       this.running = false
@@ -61,6 +57,7 @@ class PIR {
     this.pir.unwatch()
     this.pir = null
     this.callback("PIR_STOP")
+    log("Stop")
     this.running = false
   }
 }
