@@ -44,9 +44,6 @@ Pir(pirConfig, callback, debug)
 
 ### pirConfig {}
 
-gpio: BCM-number of the sensor pin
-reverseValue: presence detector value
-
 - `gpio` - BCM-number of the sensor pin.
 - `reverseValue` -  reverse presence detector value.
 
