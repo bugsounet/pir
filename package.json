@@ -1,6 +1,6 @@
 {
   "name": "@bugsounet/pir",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "node pir library",
   "main": "index.js",
   "scripts": {
