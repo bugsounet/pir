@@ -20,13 +20,16 @@ class PIR {
     this.default = {
       gpio: 21,
       reverseValue: false,
+      delayed: 0
     }
+    this.config = Object.assign({}, this.default, this.config)
     if (debug == true) log = _log
     this.pir = null
     this.running = false
     console.log("[PIR] PIR v" + this.version + " Initialized...")
     this.callback("PIR_INITIALIZED")
   }
+
   start () {
     if (this.running) return
     log("Start")
@@ -39,15 +42,18 @@ class PIR {
       return this.callback("PIR_ERROR", err)
     }
     this.running = true
-    this.pir.watch( (err, value)=> {
+    this.pir.watch((err, value)=> {
       if (err) {
         console.log("[PIR:ERROR] " + err)
         return this.callback("PIR_ERROR", err)
       }
       log("Sensor read value: " + value)
       if ((value == 1 && !this.config.reverseValue) || (value == 0 && this.config.reverseValue)) {
-        log("Detected presence (value:" + value + ")")
-        this.callback("PIR_DETECTED")
+        if (!this.config.delayed) log("Detected presence (value:" + value + ")")
+        setTimeout(()=> {
+          if (this.config.delayed) log("Send delayed Data")
+          this.callback("PIR_DETECTED")
+        }, this.config.delayed)
       }
     })
   }
@@ -56,9 +62,9 @@ class PIR {
     if (!this.running) return
     this.pir.unwatch()
     this.pir = null
+    this.running = false
     this.callback("PIR_STOP")
     log("Stop")
-    this.running = false
   }
 }
 
