@@ -22,7 +22,8 @@ const Pir = require("@bugsounet/pir")
 
 this.config = {
   gpio: 17,
-  reverseValue: false
+  reverseValue: false,
+  delayed: 0
 }
 
 var debug= false
@@ -46,6 +47,7 @@ Pir(pirConfig, callback, debug)
 
 - `gpio` - BCM-number of the sensor pin.
 - `reverseValue` -  reverse presence detector value.
+- `delayed` - send presence callback after defined delayed time (ms)
 
 ### callback (status,error)
 
