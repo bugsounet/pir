@@ -49,11 +49,13 @@ class PIR {
       }
       log("Sensor read value: " + value)
       if ((value == 1 && !this.config.reverseValue) || (value == 0 && this.config.reverseValue)) {
-        if (!this.config.delayed) log("Detected presence (value:" + value + ")")
-        setTimeout(()=> {
-          if (this.config.delayed) log("Send delayed Data")
+        if (!this.config.delayed) {
           this.callback("PIR_DETECTED")
-        }, this.config.delayed)
+          log("Detected presence (value: " + value + ")")
+        } else {
+          this.callback("PIR_DETECTED_DELAYED", this.config.delayed)
+          log("Detected presence (value: " + value + ") -- Delayed")
+        }
       }
     })
   }
