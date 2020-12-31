@@ -22,8 +22,7 @@ const Pir = require("@bugsounet/pir")
 
 this.config = {
   gpio: 17,
-  reverseValue: false,
-  delayed: 0
+  reverseValue: false
 }
 
 var debug= false
