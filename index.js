@@ -19,8 +19,7 @@ class PIR {
     this.version = require('./package.json').version
     this.default = {
       gpio: 21,
-      reverseValue: false,
-      delayed: 0
+      reverseValue: false
     }
     this.config = Object.assign({}, this.default, this.config)
     if (debug == true) log = _log
@@ -49,13 +48,8 @@ class PIR {
       }
       log("Sensor read value: " + value)
       if ((value == 1 && !this.config.reverseValue) || (value == 0 && this.config.reverseValue)) {
-        if (!this.config.delayed) {
-          this.callback("PIR_DETECTED")
-          log("Detected presence (value: " + value + ")")
-        } else {
-          this.callback("PIR_DETECTED_DELAYED", this.config.delayed)
-          log("Detected presence (value: " + value + ") -- Delayed")
-        }
+        this.callback("PIR_DETECTED")
+        log("Detected presence (value: " + value + ")")
       }
     })
   }
